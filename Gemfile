@@ -24,7 +24,6 @@ gem 'angular-ui-bootstrap-rails'
 gem 'htmlentities'
 gem 'html2haml'
 gem "haml"
-gem 'bootstrap-sass'
 
 
 
