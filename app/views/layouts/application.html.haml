@@ -1,0 +1,45 @@
+!!!
+%html
+  %head
+    %title
+      -if yield(:title).blank?
+        ="Justin's Blog"
+      -else
+        =yield(:title)
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    = stylesheet_link_tag "application"
+    = javascript_include_tag "application"
+    = csrf_meta_tag 
+  %body
+    %nav.navbar.navbar-fixed-top
+      .nav.nav-pills{:style => 'margin-right:20px; margin-left:20px;'}
+        %h3{:style => 'color: white'}Welcome to Justin's blog 
+
+    .container-fluid{:style => 'margin-top:60px;'}
+      .row-fluid
+        .span12
+          -if flash[:notice]
+            .alert.alert-success
+              = link_to "×", "", :class => "close"
+              = flash[:notice]
+          -if flash[:alert]
+            .alert
+              = link_to "×", "", :class => "close"
+              = flash[:alert]
+          -if flash[:error]
+            .alert.alert-error
+              = link_to "×", "", :class => "close"
+              = flash[:error]
+      %section
+        .row-fluid
+          .span12
+        %box
+          .row-fluid
+            .span12
+
+
+          = yield
+
+

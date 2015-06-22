@@ -1,0 +1,693 @@
+  [1m[36m (31.7ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (2.4ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20140704140814)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (14.5ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "username" character varying(255), "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (0.9ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20140704140814"]]
+  [1m[36m (1.6ms)[0m  [1mCOMMIT[0m
+Migrating to AddDeviseToUsers (20140704194919)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (47.9ms)[0m  [1mALTER TABLE "users" ADD COLUMN "email" character varying(255) DEFAULT '' NOT NULL[0m
+  [1m[35m (7.6ms)[0m  ALTER TABLE "users" ADD COLUMN "encrypted_password" character varying(255) DEFAULT '' NOT NULL
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "users" ADD COLUMN "reset_password_token" character varying(255)[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD COLUMN "reset_password_sent_at" timestamp
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "users" ADD COLUMN "remember_created_at" timestamp[0m
+  [1m[35m (5.8ms)[0m  ALTER TABLE "users" ADD COLUMN "sign_in_count" integer DEFAULT 0 NOT NULL
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "users" ADD COLUMN "current_sign_in_at" timestamp[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD COLUMN "last_sign_in_at" timestamp
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "users" ADD COLUMN "current_sign_in_ip" character varying(255)[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD COLUMN "last_sign_in_ip" character varying(255)
+  [1m[36m (1.7ms)[0m  [1mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (1.3ms)[0m  CREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20140704194919"]]
+  [1m[35m (1.4ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-22 11:26:57 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#index as HTML
+Redirected to http://0.0.0.0:3000/users/sign_in
+Completed 302 Found in 42ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-06-22 11:26:58 -0400
+Processing by SessionsController#new as HTML
+  Rendered devise/sessions/new.html.erb within layouts/application (268.9ms)
+Completed 200 OK in 5414ms (Views: 5312.8ms | ActiveRecord: 3.5ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2015-06-22 11:27:08 -0400
+Processing by Devise::RegistrationsController#new as HTML
+  Rendered devise/registrations/new.html.erb within layouts/application (22.1ms)
+Completed 200 OK in 194ms (Views: 183.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/password/new" for 127.0.0.1 at 2015-06-22 11:27:21 -0400
+Processing by Devise::PasswordsController#new as HTML
+  Rendered devise/shared/_links.erb (2.5ms)
+  Rendered devise/passwords/new.html.erb within layouts/application (190.5ms)
+Completed 200 OK in 302ms (Views: 299.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-06-22 11:30:40 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by SessionsController#new as HTML
+  Rendered devise/sessions/new.html.erb within layouts/application (149.0ms)
+Completed 200 OK in 2428ms (Views: 2317.4ms | ActiveRecord: 2.8ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2015-06-22 11:30:47 -0400
+Processing by Devise::RegistrationsController#new as HTML
+  Rendered devise/registrations/new.html.erb within layouts/application (19.4ms)
+Completed 200 OK in 110ms (Views: 106.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2015-06-22 11:31:19 -0400
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"d6gLEeMwqlRILOg1DC7+2MzZsl472MSLpM9Hw3ycodg=", "user"=>{"username"=>"jsnow", "email"=>"jrsnow8921@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+Unpermitted parameters: remember_me
+  [1m[35m (5.7ms)[0m  BEGIN
+  [1m[36mUser Exists (5.3ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'jrsnow8921@gmail.com' LIMIT 1[0m
+  [1m[35m (0.7ms)[0m  ROLLBACK
+  Rendered devise/registrations/new.html.erb within layouts/application (7.4ms)
+Completed 200 OK in 554ms (Views: 87.2ms | ActiveRecord: 11.7ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2015-06-22 11:31:28 -0400
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"d6gLEeMwqlRILOg1DC7+2MzZsl472MSLpM9Hw3ycodg=", "user"=>{"username"=>"jsnow", "email"=>"jrsnow8921@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+Unpermitted parameters: remember_me
+  [1m[36m (4.6ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (6.9ms)[0m  SELECT  1 AS one FROM "users"  WHERE "users"."email" = 'jrsnow8921@gmail.com' LIMIT 1
+  [1m[36mSQL (6.0ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "encrypted_password", "updated_at", "username") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2015-06-22 15:31:29.053235"], ["email", "jrsnow8921@gmail.com"], ["encrypted_password", "$2a$10$og6VvmVflcFBoPZfwYen8eOzDCISEYn76XWyFyKgWUP.RnVI6IpkO"], ["updated_at", "2015-06-22 15:31:29.053235"], ["username", "jsnow"]]
+  [1m[35m (0.6ms)[0m  COMMIT
+  [1m[36m (5.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (2.6ms)[0m  UPDATE "users" SET "current_sign_in_at" = $1, "current_sign_in_ip" = $2, "last_sign_in_at" = $3, "last_sign_in_ip" = $4, "sign_in_count" = $5, "updated_at" = $6 WHERE "users"."id" = 1  [["current_sign_in_at", "2015-06-22 15:31:29.089263"], ["current_sign_in_ip", "127.0.0.1"], ["last_sign_in_at", "2015-06-22 15:31:29.089263"], ["last_sign_in_ip", "127.0.0.1"], ["sign_in_count", 1], ["updated_at", "2015-06-22 15:31:29.100376"]]
+  [1m[36m (1.1ms)[0m  [1mCOMMIT[0m
+Redirected to http://0.0.0.0:3000/
+Completed 302 Found in 312ms (ActiveRecord: 29.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-22 11:31:29 -0400
+Processing by HomeController#index as HTML
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered home/index.html.erb within layouts/angular (1.5ms)
+Completed 200 OK in 950ms (Views: 690.8ms | ActiveRecord: 0.6ms)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2015-06-22 11:33:05 -0400
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"d6gLEeMwqlRILOg1DC7+2MzZsl472MSLpM9Hw3ycodg="}
+  [1m[36mUser Load (1.3ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 1  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (2.8ms)[0m  [1mCOMMIT[0m
+Redirected to http://0.0.0.0:3000/
+Completed 302 Found in 117ms (ActiveRecord: 4.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-22 11:33:05 -0400
+Processing by HomeController#index as HTML
+Redirected to http://0.0.0.0:3000/users/sign_in
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-06-22 11:33:05 -0400
+Processing by SessionsController#new as HTML
+  Rendered devise/sessions/new.html.erb within layouts/application (15.1ms)
+Completed 200 OK in 135ms (Views: 132.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-06-22 11:34:29 -0400
+Processing by SessionsController#new as HTML
+  Rendered devise/sessions/new.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 17ms (Views: 15.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-06-22 11:35:00 -0400
+Processing by SessionsController#new as HTML
+  Rendered devise/sessions/new.html.erb within layouts/application (11.9ms)
+Completed 200 OK in 86ms (Views: 81.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-06-22 11:36:05 -0400
+Processing by SessionsController#new as HTML
+  Rendered devise/sessions/new.html.erb within layouts/application (4.3ms)
+Completed 200 OK in 102ms (Views: 100.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-06-22 11:37:35 -0400
+Processing by SessionsController#new as HTML
+  Rendered devise/sessions/new.html.erb within layouts/application (5.6ms)
+Completed 200 OK in 1637ms (Views: 1634.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-06-22 11:38:29 -0400
+Processing by SessionsController#new as HTML
+  Rendered devise/sessions/new.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 1703ms (Views: 1699.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-06-22 11:38:40 -0400
+Processing by SessionsController#new as HTML
+  Rendered devise/sessions/new.html.erb within layouts/application (6.0ms)
+Completed 200 OK in 1709ms (Views: 1707.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2015-06-22 11:38:45 -0400
+Processing by Devise::RegistrationsController#new as HTML
+  Rendered devise/registrations/new.html.erb within layouts/application (8.9ms)
+Completed 200 OK in 110ms (Views: 109.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2015-06-22 11:38:58 -0400
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Wc6+RbNXez62bkQ3NnXBYwJQ3M2T6ToB3cXVFQM9NT0=", "user"=>{"email"=>"jrsnow8921@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+  [1m[35mUser Load (3.0ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."email" = 'jrsnow8921@gmail.com'  ORDER BY "users"."id" ASC LIMIT 1
+Completed 401 Unauthorized in 205ms
+Processing by SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Wc6+RbNXez62bkQ3NnXBYwJQ3M2T6ToB3cXVFQM9NT0=", "user"=>{"email"=>"jrsnow8921@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+  Rendered devise/sessions/new.html.erb within layouts/application (7.2ms)
+Completed 200 OK in 319ms (Views: 127.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2015-06-22 11:39:05 -0400
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Wc6+RbNXez62bkQ3NnXBYwJQ3M2T6ToB3cXVFQM9NT0=", "user"=>{"email"=>"jrsnow8921@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."email" = 'jrsnow8921@gmail.com'  ORDER BY "users"."id" ASC LIMIT 1[0m
+Completed 401 Unauthorized in 205ms
+Processing by SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Wc6+RbNXez62bkQ3NnXBYwJQ3M2T6ToB3cXVFQM9NT0=", "user"=>{"email"=>"jrsnow8921@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+  Rendered devise/sessions/new.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 373ms (Views: 169.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2015-06-22 11:39:11 -0400
+Processing by Devise::RegistrationsController#new as HTML
+  Rendered devise/registrations/new.html.erb within layouts/application (11.8ms)
+Completed 200 OK in 137ms (Views: 135.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2015-06-22 11:39:27 -0400
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Wc6+RbNXez62bkQ3NnXBYwJQ3M2T6ToB3cXVFQM9NT0=", "user"=>{"email"=>"jrsnow8921@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+  [1m[35mUser Load (5.7ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."email" = 'jrsnow8921@gmail.com'  ORDER BY "users"."id" ASC LIMIT 1
+Completed 401 Unauthorized in 194ms
+Processing by SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Wc6+RbNXez62bkQ3NnXBYwJQ3M2T6ToB3cXVFQM9NT0=", "user"=>{"email"=>"jrsnow8921@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+  Rendered devise/sessions/new.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 284ms (Views: 75.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2015-06-22 11:39:29 -0400
+Processing by Devise::RegistrationsController#new as HTML
+  Rendered devise/registrations/new.html.erb within layouts/application (6.0ms)
+Completed 200 OK in 123ms (Views: 121.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2015-06-22 11:39:49 -0400
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Wc6+RbNXez62bkQ3NnXBYwJQ3M2T6ToB3cXVFQM9NT0=", "user"=>{"username"=>"snowj", "email"=>"jrsnow8921@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+Unpermitted parameters: remember_me
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (0.4ms)[0m  SELECT  1 AS one FROM "users"  WHERE "users"."email" = 'jrsnow8921@gmail.com' LIMIT 1
+  [1m[36m (4.9ms)[0m  [1mROLLBACK[0m
+  Rendered devise/registrations/new.html.erb within layouts/application (18.3ms)
+Completed 200 OK in 351ms (Views: 146.7ms | ActiveRecord: 5.5ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2015-06-22 11:40:06 -0400
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Wc6+RbNXez62bkQ3NnXBYwJQ3M2T6ToB3cXVFQM9NT0=", "user"=>{"email"=>"jrsnow8921@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+  [1m[35mUser Load (6.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."email" = 'jrsnow8921@gmail.com'  ORDER BY "users"."id" ASC LIMIT 1
+Completed 401 Unauthorized in 199ms
+Processing by SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Wc6+RbNXez62bkQ3NnXBYwJQ3M2T6ToB3cXVFQM9NT0=", "user"=>{"email"=>"jrsnow8921@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+  Rendered devise/sessions/new.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 369ms (Views: 172.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/password/new" for 127.0.0.1 at 2015-06-22 11:40:10 -0400
+Processing by Devise::PasswordsController#new as HTML
+  Rendered devise/shared/_links.erb (1.7ms)
+  Rendered devise/passwords/new.html.erb within layouts/application (44.3ms)
+Completed 200 OK in 166ms (Views: 163.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/password" for 127.0.0.1 at 2015-06-22 11:40:11 -0400
+Processing by Devise::PasswordsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Wc6+RbNXez62bkQ3NnXBYwJQ3M2T6ToB3cXVFQM9NT0=", "user"=>{"email"=>""}, "commit"=>"Send me reset password instructions"}
+  Rendered devise/shared/_links.erb (5.9ms)
+  Rendered devise/passwords/new.html.erb within layouts/application (14.0ms)
+Completed 200 OK in 140ms (Views: 129.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/password" for 127.0.0.1 at 2015-06-22 11:40:16 -0400
+Processing by Devise::PasswordsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Wc6+RbNXez62bkQ3NnXBYwJQ3M2T6ToB3cXVFQM9NT0=", "user"=>{"email"=>"jrsnow8921@gmail.com"}, "commit"=>"Send me reset password instructions"}
+  [1m[36mUser Load (3.8ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."email" = 'jrsnow8921@gmail.com'  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."reset_password_token" = '59497c7f719fb648c4e0b300c27ecc029d6d83e5e36c78aebcaef56a0da6f7d8'  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  UPDATE "users" SET "reset_password_sent_at" = $1, "reset_password_token" = $2, "updated_at" = $3 WHERE "users"."id" = 1  [["reset_password_sent_at", "2015-06-22 15:40:17.386940"], ["reset_password_token", "59497c7f719fb648c4e0b300c27ecc029d6d83e5e36c78aebcaef56a0da6f7d8"], ["updated_at", "2015-06-22 15:40:17.387666"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  Rendered devise/mailer/reset_password_instructions.html.erb (1.7ms)
+
+Devise::Mailer#reset_password_instructions: processed outbound mail in 12.5ms
+Completed 500 Internal Server Error in 547ms
+
+ActionView::Template::Error (Missing host to link to! Please provide the :host parameter, set default_url_options[:host], or set :only_path to true):
+    2: 
+    3: <p>Someone has requested a link to change your password. You can do this through the link below.</p>
+    4: 
+    5: <p><%= link_to 'Change my password', edit_password_url(@resource, reset_password_token: @token) %></p>
+    6: 
+    7: <p>If you didn't request this, please ignore this email.</p>
+    8: <p>Your password won't change until you access the link above and create a new one.</p>
+  app/views/devise/mailer/reset_password_instructions.html.erb:5:in `_app_views_devise_mailer_reset_password_instructions_html_erb__664177638230882253_44068060'
+
+
+  Rendered /var/lib/gems/1.9.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.9ms)
+  Rendered /var/lib/gems/1.9.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /var/lib/gems/1.9.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (15.0ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2015-06-22 11:40:29 -0400
+Processing by Devise::RegistrationsController#new as HTML
+  Rendered devise/registrations/new.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 130ms (Views: 128.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2015-06-22 11:40:43 -0400
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Wc6+RbNXez62bkQ3NnXBYwJQ3M2T6ToB3cXVFQM9NT0=", "user"=>{"username"=>"snowj", "email"=>"justin_snow@pennunited.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+Unpermitted parameters: remember_me
+  [1m[35m (2.4ms)[0m  BEGIN
+  [1m[36mUser Exists (6.1ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'justin_snow@pennunited.com' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  Rendered devise/registrations/new.html.erb within layouts/application (12.2ms)
+Completed 200 OK in 331ms (Views: 123.1ms | ActiveRecord: 8.7ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2015-06-22 11:40:54 -0400
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Wc6+RbNXez62bkQ3NnXBYwJQ3M2T6ToB3cXVFQM9NT0=", "user"=>{"username"=>"snowj", "email"=>"justin_snow@pennunited.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+Unpermitted parameters: remember_me
+  [1m[36m (7.1ms)[0m  [1mBEGIN[0m
+  [1m[35mUser Exists (4.8ms)[0m  SELECT  1 AS one FROM "users"  WHERE "users"."email" = 'justin_snow@pennunited.com' LIMIT 1
+  [1m[36mSQL (11.6ms)[0m  [1mINSERT INTO "users" ("created_at", "email", "encrypted_password", "updated_at", "username") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", "2015-06-22 15:40:54.354472"], ["email", "justin_snow@pennunited.com"], ["encrypted_password", "$2a$10$qWyI4yFtPO34U5SXTXT5Ue.OntnP.PgYre4bNZgI8.kZcWXqYSl4y"], ["updated_at", "2015-06-22 15:40:54.354472"], ["username", "snowj"]]
+  [1m[35m (1.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  UPDATE "users" SET "current_sign_in_at" = $1, "current_sign_in_ip" = $2, "last_sign_in_at" = $3, "last_sign_in_ip" = $4, "sign_in_count" = $5, "updated_at" = $6 WHERE "users"."id" = 2  [["current_sign_in_at", "2015-06-22 15:40:54.370615"], ["current_sign_in_ip", "127.0.0.1"], ["last_sign_in_at", "2015-06-22 15:40:54.370615"], ["last_sign_in_ip", "127.0.0.1"], ["sign_in_count", 1], ["updated_at", "2015-06-22 15:40:54.371272"]]
+  [1m[36m (1.2ms)[0m  [1mCOMMIT[0m
+Redirected to http://0.0.0.0:3000/
+Completed 302 Found in 241ms (ActiveRecord: 26.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-22 11:40:54 -0400
+Processing by HomeController#index as HTML
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 2  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered home/index.html.erb within layouts/angular (0.2ms)
+Completed 200 OK in 254ms (Views: 250.1ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-22 11:41:38 -0400
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (2.8ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 2  ORDER BY "users"."id" ASC LIMIT 1[0m
+  Rendered home/index.html.erb within layouts/angular (0.2ms)
+Completed 200 OK in 1933ms (Views: 1927.8ms | ActiveRecord: 2.8ms)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2015-06-22 11:43:44 -0400
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"Wc6+RbNXez62bkQ3NnXBYwJQ3M2T6ToB3cXVFQM9NT0="}
+  [1m[35mUser Load (0.6ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 2  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36m (4.9ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+Redirected to http://0.0.0.0:3000/
+Completed 302 Found in 14ms (ActiveRecord: 5.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-22 11:43:44 -0400
+Processing by HomeController#index as HTML
+Redirected to http://0.0.0.0:3000/users/sign_in
+Completed 302 Found in 3ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-06-22 11:43:44 -0400
+Processing by SessionsController#new as HTML
+  Rendered devise/sessions/new.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 90ms (Views: 88.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-06-22 11:43:46 -0400
+Processing by SessionsController#new as HTML
+  Rendered devise/sessions/new.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 112ms (Views: 109.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-06-22 11:45:29 -0400
+Processing by SessionsController#new as HTML
+  Rendered devise/sessions/new.html.erb within layouts/application (13.4ms)
+Completed 500 Internal Server Error in 30ms
+
+ActionView::Template::Error (Unbalanced brackets.):
+    14:     = csrf_meta_tag 
+    15:   %body
+    16:     %nav.navbar.navbar-fixed-top
+    17:       .nav.nav-pills{:style => 'color: white'
+    18:         =link_to "⌂ Blog Home", "http://timeoff.pennunited.com", :class => 'home'
+    19: 
+    20:     .container-fluid{:style => 'margin-top:60px;'}
+  app/views/layouts/application.html.haml:17
+
+
+  Rendered /var/lib/gems/1.9.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.4ms)
+  Rendered /var/lib/gems/1.9.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /var/lib/gems/1.9.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (31.1ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-06-22 11:45:38 -0400
+Processing by SessionsController#new as HTML
+  Rendered devise/sessions/new.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 280ms (Views: 276.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-06-22 11:47:15 -0400
+Processing by SessionsController#new as HTML
+  Rendered devise/sessions/new.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 1787ms (Views: 1781.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2015-06-22 11:50:08 -0400
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"uaSaXjsCnEq4+xh17Bkc3hJ5le/ecnZiyq3eaTltpAk=", "user"=>{"email"=>"justin_snow@pennunited.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+  [1m[36mUser Load (28.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."email" = 'justin_snow@pennunited.com'  ORDER BY "users"."id" ASC LIMIT 1[0m
+Completed 401 Unauthorized in 226ms
+Processing by SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"uaSaXjsCnEq4+xh17Bkc3hJ5le/ecnZiyq3eaTltpAk=", "user"=>{"email"=>"justin_snow@pennunited.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+  Rendered devise/sessions/new.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 364ms (Views: 171.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2015-06-22 11:50:13 -0400
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"uaSaXjsCnEq4+xh17Bkc3hJ5le/ecnZiyq3eaTltpAk=", "user"=>{"email"=>"justin_snow@pennunited.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+  [1m[35mUser Load (5.3ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."email" = 'justin_snow@pennunited.com'  ORDER BY "users"."id" ASC LIMIT 1
+Completed 401 Unauthorized in 191ms
+Processing by SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"uaSaXjsCnEq4+xh17Bkc3hJ5le/ecnZiyq3eaTltpAk=", "user"=>{"email"=>"justin_snow@pennunited.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+  Rendered devise/sessions/new.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 240ms (Views: 69.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-06-22 11:50:23 -0400
+Processing by SessionsController#new as HTML
+  Rendered devise/sessions/new.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 118ms (Views: 114.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2015-06-22 11:50:35 -0400
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"uaSaXjsCnEq4+xh17Bkc3hJ5le/ecnZiyq3eaTltpAk=", "user"=>{"email"=>"justin_snow@pennunited.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."email" = 'justin_snow@pennunited.com'  ORDER BY "users"."id" ASC LIMIT 1[0m
+Completed 401 Unauthorized in 198ms
+Processing by SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"uaSaXjsCnEq4+xh17Bkc3hJ5le/ecnZiyq3eaTltpAk=", "user"=>{"email"=>"justin_snow@pennunited.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+  Rendered devise/sessions/new.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 230ms (Views: 59.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2015-06-22 11:51:10 -0400
+Processing by Devise::RegistrationsController#new as HTML
+  Rendered devise/registrations/new.html.erb within layouts/application (4.1ms)
+Completed 200 OK in 118ms (Views: 114.6ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2015-06-22 11:51:41 -0400
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"uaSaXjsCnEq4+xh17Bkc3hJ5le/ecnZiyq3eaTltpAk=", "user"=>{"username"=>"jrsnow", "email"=>"j.r.snow@iup.edu", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+Unpermitted parameters: remember_me
+  [1m[35m (5.5ms)[0m  BEGIN
+  [1m[36mUser Exists (1.6ms)[0m  [1mSELECT  1 AS one FROM "users"  WHERE "users"."email" = 'j.r.snow@iup.edu' LIMIT 1[0m
+  [1m[35mSQL (10.4ms)[0m  INSERT INTO "users" ("created_at", "email", "encrypted_password", "updated_at", "username") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["created_at", "2015-06-22 15:51:41.804023"], ["email", "j.r.snow@iup.edu"], ["encrypted_password", "$2a$10$S.8dYiYqJg7Wd5xAicwLOepRDV8IhG7t3jKkc2ScUVoZNnc4NbtVe"], ["updated_at", "2015-06-22 15:51:41.804023"], ["username", "jrsnow"]]
+  [1m[36m (0.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (3.2ms)[0m  [1mUPDATE "users" SET "current_sign_in_at" = $1, "current_sign_in_ip" = $2, "last_sign_in_at" = $3, "last_sign_in_ip" = $4, "sign_in_count" = $5, "updated_at" = $6 WHERE "users"."id" = 3[0m  [["current_sign_in_at", "2015-06-22 15:51:41.821769"], ["current_sign_in_ip", "127.0.0.1"], ["last_sign_in_at", "2015-06-22 15:51:41.821769"], ["last_sign_in_ip", "127.0.0.1"], ["sign_in_count", 1], ["updated_at", "2015-06-22 15:51:41.822488"]]
+  [1m[35m (0.9ms)[0m  COMMIT
+Redirected to http://0.0.0.0:3000/
+Completed 302 Found in 252ms (ActiveRecord: 22.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-22 11:51:41 -0400
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (8.5ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 3  ORDER BY "users"."id" ASC LIMIT 1[0m
+  Rendered home/index.html.erb within layouts/angular (0.2ms)
+Completed 200 OK in 288ms (Views: 277.6ms | ActiveRecord: 8.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-22 11:53:49 -0400
+
+LoadError (cannot load such file -- /home/programmer/rails-angular-devise/config/routes.rb):
+  activesupport (4.1.8) lib/active_support/dependencies.rb:241:in `load'
+  activesupport (4.1.8) lib/active_support/dependencies.rb:241:in `block in load'
+  activesupport (4.1.8) lib/active_support/dependencies.rb:232:in `load_dependency'
+  activesupport (4.1.8) lib/active_support/dependencies.rb:241:in `load'
+  railties (4.1.8) lib/rails/application/routes_reloader.rb:40:in `block in load_paths'
+  railties (4.1.8) lib/rails/application/routes_reloader.rb:40:in `each'
+  railties (4.1.8) lib/rails/application/routes_reloader.rb:40:in `load_paths'
+  railties (4.1.8) lib/rails/application/routes_reloader.rb:16:in `reload!'
+  railties (4.1.8) lib/rails/application/routes_reloader.rb:26:in `block in updater'
+  activesupport (4.1.8) lib/active_support/file_update_checker.rb:75:in `call'
+  activesupport (4.1.8) lib/active_support/file_update_checker.rb:75:in `execute'
+  railties (4.1.8) lib/rails/application/routes_reloader.rb:7:in `execute'
+  railties (4.1.8) lib/rails/application/finisher.rb:83:in `block (2 levels) in <module:Finisher>'
+  activesupport (4.1.8) lib/active_support/callbacks.rb:438:in `instance_exec'
+  activesupport (4.1.8) lib/active_support/callbacks.rb:438:in `block in make_lambda'
+  activesupport (4.1.8) lib/active_support/callbacks.rb:184:in `call'
+  activesupport (4.1.8) lib/active_support/callbacks.rb:184:in `block in simple'
+  activesupport (4.1.8) lib/active_support/callbacks.rb:185:in `call'
+  activesupport (4.1.8) lib/active_support/callbacks.rb:185:in `block in simple'
+  activesupport (4.1.8) lib/active_support/callbacks.rb:185:in `call'
+  activesupport (4.1.8) lib/active_support/callbacks.rb:185:in `block in simple'
+  activesupport (4.1.8) lib/active_support/callbacks.rb:185:in `call'
+  activesupport (4.1.8) lib/active_support/callbacks.rb:185:in `block in simple'
+  activesupport (4.1.8) lib/active_support/callbacks.rb:86:in `call'
+  activesupport (4.1.8) lib/active_support/callbacks.rb:86:in `run_callbacks'
+  actionpack (4.1.8) lib/action_dispatch/middleware/reloader.rb:83:in `prepare!'
+  actionpack (4.1.8) lib/action_dispatch/middleware/reloader.rb:71:in `call'
+  actionpack (4.1.8) lib/action_dispatch/middleware/remote_ip.rb:76:in `call'
+  actionpack (4.1.8) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.1.8) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.8) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.8) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.8) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.8) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.8) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.8) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  actionpack (4.1.8) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.8) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.5) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.8) lib/action_dispatch/middleware/static.rb:84:in `call'
+  rack (1.5.5) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.8) lib/rails/engine.rb:514:in `call'
+  railties (4.1.8) lib/rails/application.rb:144:in `call'
+  rack (1.5.5) lib/rack/content_length.rb:14:in `call'
+  thin (1.6.3) lib/thin/connection.rb:86:in `block in pre_process'
+  thin (1.6.3) lib/thin/connection.rb:84:in `catch'
+  thin (1.6.3) lib/thin/connection.rb:84:in `pre_process'
+  thin (1.6.3) lib/thin/connection.rb:53:in `process'
+  thin (1.6.3) lib/thin/connection.rb:39:in `receive_data'
+  eventmachine (1.0.7) lib/eventmachine.rb:187:in `run_machine'
+  eventmachine (1.0.7) lib/eventmachine.rb:187:in `run'
+  thin (1.6.3) lib/thin/backends/base.rb:73:in `start'
+  thin (1.6.3) lib/thin/server.rb:162:in `start'
+  rack (1.5.5) lib/rack/handler/thin.rb:16:in `run'
+  rack (1.5.5) lib/rack/server.rb:264:in `start'
+  railties (4.1.8) lib/rails/commands/server.rb:69:in `start'
+  railties (4.1.8) lib/rails/commands/commands_tasks.rb:81:in `block in server'
+  railties (4.1.8) lib/rails/commands/commands_tasks.rb:76:in `tap'
+  railties (4.1.8) lib/rails/commands/commands_tasks.rb:76:in `server'
+  railties (4.1.8) lib/rails/commands/commands_tasks.rb:40:in `run_command!'
+  railties (4.1.8) lib/rails/commands.rb:17:in `<top (required)>'
+  bin/rails:8:in `require'
+  bin/rails:8:in `<main>'
+
+
+  Rendered /var/lib/gems/1.9.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/rescues/_source.erb (1.6ms)
+  Rendered /var/lib/gems/1.9.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.5ms)
+  Rendered /var/lib/gems/1.9.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /var/lib/gems/1.9.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (41.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-22 11:55:00 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (1.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by HomeController#index as HTML
+Redirected to http://0.0.0.0:3000/users/sign_in
+Completed 302 Found in 51ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-06-22 11:55:01 -0400
+Processing by SessionsController#new as HTML
+  Rendered devise/sessions/new.html.erb within layouts/application (174.6ms)
+Completed 200 OK in 3190ms (Views: 3064.8ms | ActiveRecord: 4.3ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2015-06-22 11:55:15 -0400
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"dYekivaeQPvd/D+G7zIlKB0bb5rHeawH4871d4EYoyQ=", "user"=>{"email"=>"justin_snow@pennunited.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+  [1m[35mUser Load (6.6ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."email" = 'justin_snow@pennunited.com'  ORDER BY "users"."id" ASC LIMIT 1
+Completed 401 Unauthorized in 369ms
+Processing by SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"dYekivaeQPvd/D+G7zIlKB0bb5rHeawH4871d4EYoyQ=", "user"=>{"email"=>"justin_snow@pennunited.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+  Rendered devise/sessions/new.html.erb within layouts/application (11.9ms)
+Completed 200 OK in 356ms (Views: 149.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2015-06-22 11:55:26 -0400
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"dYekivaeQPvd/D+G7zIlKB0bb5rHeawH4871d4EYoyQ=", "user"=>{"email"=>"j.r.snow@iup.edu", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+  [1m[36mUser Load (2.0ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."email" = 'j.r.snow@iup.edu'  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35m (6.2ms)[0m  BEGIN
+  [1m[36mSQL (4.2ms)[0m  [1mUPDATE "users" SET "current_sign_in_at" = $1, "sign_in_count" = $2, "updated_at" = $3 WHERE "users"."id" = 3[0m  [["current_sign_in_at", "2015-06-22 15:55:26.612872"], ["sign_in_count", 2], ["updated_at", "2015-06-22 15:55:26.621057"]]
+  [1m[35m (5.4ms)[0m  COMMIT
+Redirected to http://0.0.0.0:3000/
+Completed 302 Found in 413ms (ActiveRecord: 20.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-22 11:55:26 -0400
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (1.9ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 3  ORDER BY "users"."id" ASC LIMIT 1[0m
+  Rendered home/index.html.erb within layouts/angular (0.8ms)
+Completed 200 OK in 703ms (Views: 697.6ms | ActiveRecord: 1.9ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2015-06-22 11:57:20 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (10.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+	bin/rake db:migrate RAILS_ENV=development
+
+):
+  activerecord (4.1.8) lib/active_record/migration.rb:389:in `check_pending!'
+  activerecord (4.1.8) lib/active_record/migration.rb:377:in `call'
+  actionpack (4.1.8) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.1.8) lib/active_support/callbacks.rb:82:in `run_callbacks'
+  actionpack (4.1.8) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.1.8) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.1.8) lib/action_dispatch/middleware/remote_ip.rb:76:in `call'
+  actionpack (4.1.8) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.1.8) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.8) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.8) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.8) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.8) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.8) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.8) lib/rails/rack/logger.rb:20:in `call'
+  quiet_assets (1.1.0) lib/quiet_assets.rb:27:in `call_with_quiet_assets'
+  actionpack (4.1.8) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.5) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.5) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.8) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.5) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.8) lib/action_dispatch/middleware/static.rb:84:in `call'
+  rack (1.5.5) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.8) lib/rails/engine.rb:514:in `call'
+  railties (4.1.8) lib/rails/application.rb:144:in `call'
+  rack (1.5.5) lib/rack/content_length.rb:14:in `call'
+  thin (1.6.3) lib/thin/connection.rb:86:in `block in pre_process'
+  thin (1.6.3) lib/thin/connection.rb:84:in `catch'
+  thin (1.6.3) lib/thin/connection.rb:84:in `pre_process'
+  thin (1.6.3) lib/thin/connection.rb:53:in `process'
+  thin (1.6.3) lib/thin/connection.rb:39:in `receive_data'
+  eventmachine (1.0.7) lib/eventmachine.rb:187:in `run_machine'
+  eventmachine (1.0.7) lib/eventmachine.rb:187:in `run'
+  thin (1.6.3) lib/thin/backends/base.rb:73:in `start'
+  thin (1.6.3) lib/thin/server.rb:162:in `start'
+  rack (1.5.5) lib/rack/handler/thin.rb:16:in `run'
+  rack (1.5.5) lib/rack/server.rb:264:in `start'
+  railties (4.1.8) lib/rails/commands/server.rb:69:in `start'
+  railties (4.1.8) lib/rails/commands/commands_tasks.rb:81:in `block in server'
+  railties (4.1.8) lib/rails/commands/commands_tasks.rb:76:in `tap'
+  railties (4.1.8) lib/rails/commands/commands_tasks.rb:76:in `server'
+  railties (4.1.8) lib/rails/commands/commands_tasks.rb:40:in `run_command!'
+  railties (4.1.8) lib/rails/commands.rb:17:in `<top (required)>'
+  bin/rails:8:in `require'
+  bin/rails:8:in `<main>'
+
+
+  Rendered /var/lib/gems/1.9.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.9ms)
+  Rendered /var/lib/gems/1.9.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.2ms)
+  Rendered /var/lib/gems/1.9.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.5ms)
+  Rendered /var/lib/gems/1.9.1/gems/actionpack-4.1.8/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (32.8ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateHomes (20150619172914)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (83.0ms)[0m  [1mCREATE TABLE "homes" ("id" serial primary key, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (2.7ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150619172914"]]
+  [1m[36m (5.1ms)[0m  [1mCOMMIT[0m
+Migrating to DeviseCreateModels (20150622150046)
+  [1m[35m (2.3ms)[0m  BEGIN
+  [1m[36m (25.0ms)[0m  [1mCREATE TABLE "models" ("id" serial primary key, "email" character varying(255) DEFAULT '' NOT NULL, "encrypted_password" character varying(255) DEFAULT '' NOT NULL, "reset_password_token" character varying(255), "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" inet, "last_sign_in_ip" inet, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (1.5ms)[0m  CREATE UNIQUE INDEX  "index_models_on_email" ON "models"  ("email")
+  [1m[36m (1.2ms)[0m  [1mCREATE UNIQUE INDEX  "index_models_on_reset_password_token" ON "models"  ("reset_password_token")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150622150046"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2015-06-22 11:58:14 -0400
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"dYekivaeQPvd/D+G7zIlKB0bb5rHeawH4871d4EYoyQ=", "user"=>{"email"=>"justin_snow@pennunited.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Sign In"}
+  [1m[36mUser Load (1.2ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 3  ORDER BY "users"."id" ASC LIMIT 1[0m
+Redirected to http://0.0.0.0:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 215ms (ActiveRecord: 11.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-22 11:58:15 -0400
+Processing by HomeController#index as HTML
+  [1m[35mUser Load (1.0ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 3  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered home/index.html.erb within layouts/angular (0.8ms)
+Completed 200 OK in 2442ms (Views: 2436.5ms | ActiveRecord: 1.0ms)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2015-06-22 11:58:21 -0400
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"9VGx3duvuKy8j2WUIQzbOQG4I5e56qck58RCpx8q8yE="}
+  [1m[36mUser Load (2.7ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 3  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35m (4.6ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+Redirected to http://0.0.0.0:3000/
+Completed 302 Found in 45ms (ActiveRecord: 7.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-06-22 11:58:22 -0400
+Processing by HomeController#index as HTML
+Redirected to http://0.0.0.0:3000/users/sign_in
+Completed 302 Found in 12ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-06-22 11:58:22 -0400
+Processing by SessionsController#new as HTML
+  Rendered devise/sessions/new.html.erb within layouts/application (155.3ms)
+Completed 200 OK in 301ms (Views: 299.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-06-22 11:58:27 -0400
+Processing by SessionsController#new as HTML
+  Rendered devise/sessions/new.html.erb within layouts/application (7.7ms)
+Completed 200 OK in 113ms (Views: 111.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-06-22 12:13:24 -0400
+Processing by SessionsController#new as HTML
+  Rendered devise/sessions/new.html.erb within layouts/application (28.2ms)
+Completed 200 OK in 240ms (Views: 172.2ms | ActiveRecord: 0.0ms)
