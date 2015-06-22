@@ -1,0 +1,16 @@
+
+
+- 3.times do
+  %br
+
+.row-fluid
+  =simple_form_for @post, :url => url_for(:controller => 'post', :action => 'create'), :method => :post do |f|
+    = f.input :user, :as => "hidden", :input_html => {:value => current_user.email}
+
+    %table.table.table-bordered.table-striped{:style => 'table-layout:fixed; width:100% !important;'}
+      %th.lt.h2.feed Post:
+      %td.lt.h3.feed= f.text_area :post_text, :size => 250
+
+    = f.button :submit, "Submit", :class => 'btn btn-success'
+
+

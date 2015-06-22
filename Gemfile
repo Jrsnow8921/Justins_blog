@@ -10,7 +10,8 @@ gem 'jbuilder', '~> 2.0'
 
 gem 'pg'
 gem 'bootstrap-sass'
-
+gem 'composite_primary_keys'
+gem 'protected_attributes'
 gem 'rake', '~> 10.4.2'
 
 gem 'devise'
@@ -24,7 +25,7 @@ gem 'angular-ui-bootstrap-rails'
 gem 'htmlentities'
 gem 'html2haml'
 gem "haml"
-
+gem 'simple_form'
 
 
 gem 'simplecov'

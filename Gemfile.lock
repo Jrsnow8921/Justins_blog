@@ -50,6 +50,8 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.9.1.1)
+    composite_primary_keys (7.0.13)
+      activerecord (~> 4.1.7)
     daemons (1.2.2)
     devise (3.5.1)
       bcrypt (~> 3.0)
@@ -91,6 +93,8 @@ GEM
       mini_portile (~> 0.6.0)
     orm_adapter (0.5.0)
     pg (0.18.2)
+    protected_attributes (1.0.9)
+      activemodel (>= 4.0.1, < 5.0)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.5.5)
@@ -130,6 +134,9 @@ GEM
       sprockets (~> 2.8, < 3.0)
       sprockets-rails (~> 2.0)
     sexp_processor (4.5.0)
+    simple_form (3.1.0)
+      actionpack (~> 4.0)
+      activemodel (~> 4.0)
     simplecov (0.10.0)
       docile (~> 1.1.0)
       json (~> 1.8)
@@ -175,6 +182,7 @@ DEPENDENCIES
   bootstrap-sass
   cancan
   coffee-rails (~> 4.0.0)
+  composite_primary_keys
   devise
   haml
   html2haml
@@ -183,12 +191,14 @@ DEPENDENCIES
   jquery-rails
   ng-rails-csrf
   pg
+  protected_attributes
   quiet_assets
   rails (= 4.1.8)
   rails_12factor
   rake (~> 10.4.2)
   redcarpet (= 2.2.2)
   sass-rails (~> 4.0.3)
+  simple_form
   simplecov
   therubyracer
   thin

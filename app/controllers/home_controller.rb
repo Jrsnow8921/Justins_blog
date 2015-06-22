@@ -13,6 +13,7 @@ class HomeController < ApplicationController
   def index
     # Once someone signs in, hand things over to the angular page
     if current_user && user_signed_in?
+      @post = Post.all
       render 'index'
     else
       redirect_to new_user_session_path

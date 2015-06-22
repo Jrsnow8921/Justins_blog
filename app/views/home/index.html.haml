@@ -1,1 +1,25 @@
-%li hello justin
+%body{"ng-app" => "myApp"}
+  .container
+    .header
+      %ul.nav.nav-pills.pull-right
+        %li.active
+          %a{"ng-href" => "#"} Home
+        %li
+          %a{"ng-href" => "#/about"} About
+        %li
+          %a{"data-method" => "delete", :href => "/users/sign_out", :target => "_self"} Sign Out
+      %h3.text-muted
+        = t( 'app_name', name: RailsAngularDevise::Application.config.app_name )
+        \- angular page
+    %div{"ng-view" => ""}
+
+
+%table.table.table-bordered.trace-table
+  %tr
+  -@post.each do |p|
+    %tr
+      %td.trace-table{:style => 'width:6.7%;'}= p.id
+      %td.trace-table{:style => 'width:6.7%;'}= p.user
+      %td.trace-table{:style => 'width:6.7%;'}= p.post_text
+     
+
