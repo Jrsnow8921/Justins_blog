@@ -38,3 +38,6 @@ gem 'quiet_assets'
 gem 'thin'
 
 
+# Heroku configs  --Comment these out if deploying somewhere else
+ruby '1.9.3'
+gem 'rails_12factor'

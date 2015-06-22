@@ -691,3 +691,10 @@ Started GET "/users/sign_in" for 127.0.0.1 at 2015-06-22 12:13:24 -0400
 Processing by SessionsController#new as HTML
   Rendered devise/sessions/new.html.erb within layouts/application (28.2ms)
 Completed 200 OK in 240ms (Views: 172.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-06-22 12:43:39 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (3.8ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by SessionsController#new as HTML
+  Rendered devise/sessions/new.html.erb within layouts/application (131.2ms)
+Completed 200 OK in 2214ms (Views: 2058.3ms | ActiveRecord: 2.4ms)
