@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :post
-
+ 
   namespace :api do
 
   end

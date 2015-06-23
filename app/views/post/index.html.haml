@@ -1,6 +1,16 @@
 
 %table.table.table-bordered.trace-table
-  %tr
-  -@post.each do |p|
-    %tr
-      %td.trace-table{:style => 'width:6.7%;'}= p.id
+  %thead
+    %tr.trace-table
+      %th.ts.jp{:style => 'border: solid black;'} Subject
+      %th.ts.jp{:style => 'border: solid black;'} First Name
+      %th.ts.jp{:style => 'border: solid black;'} Last Name
+      %th.ts.jp{:style => 'border: solid black;'} Post
+
+    -@post.each do |p|
+      %tr.trace-table
+        %td.trace-table{:style => 'border: solid black;'}= p.SUBJECT
+        %td.trace-table{:style => 'border: solid black;'}= p.FIRST_NAME
+        %td.trace-table{:style => 'border: solid black;'}= p.LAST_NAME
+        %td.trace-table{:style => 'border: solid black;'}= p.post_text
+

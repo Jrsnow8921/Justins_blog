@@ -1,6 +1,8 @@
 class PostController < ApplicationController
 
   skip_authorization_check
+	
+  skip_before_filter :verify_authenticity_token
 
   before_action :authenticate_user!
 
@@ -21,6 +23,7 @@ class PostController < ApplicationController
 
   def new
     @post = Post.new
+
     respond_to do |format|
       format.html# new.html.haml
       format.xml { render :xml => @post }
@@ -29,8 +32,9 @@ class PostController < ApplicationController
   end
 
   def create
-    @post = Post.new(params[:post])
+    @post = Post.new(post_params)
     @post.save!
+     
     respond_to do |format|
 
       if @post.save
@@ -47,5 +51,11 @@ class PostController < ApplicationController
       format.html { redirect_to(home_index_path) }
       format.xml { head :ok }
     end
+  end
+
+  private
+
+  def post_params
+    params.permit(:id, :created_at, :updated_at, :post_text, :user, :SUBJECT, :FIRST_NAME, :LAST_NAME, :EMAIL)
   end
 end

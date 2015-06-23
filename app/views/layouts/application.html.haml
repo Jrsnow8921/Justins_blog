@@ -20,18 +20,6 @@
     .container-fluid{:style => 'margin-top:60px;'}
       .row-fluid
         .span12
-          -if flash[:notice]
-            .alert.alert-success
-              = link_to "×", "", :class => "close"
-              = flash[:notice]
-          -if flash[:alert]
-            .alert
-              = link_to "×", "", :class => "close"
-              = flash[:alert]
-          -if flash[:error]
-            .alert.alert-error
-              = link_to "×", "", :class => "close"
-              = flash[:error]
       %section
         .row-fluid
           .span12
@@ -41,5 +29,6 @@
 
 
           = yield
+
 
 
