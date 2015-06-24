@@ -7,55 +7,31 @@ class PostController < ApplicationController
   before_action :authenticate_user!
 
   layout 'angular'
-
+ 
+  respond_to :json
 
   def index
-    @post = Post.all
-  end
-
-  def show
-    @post = Post.all
     respond_to do |format|
-      format.html # show.html.haml
-      format.xml  { render :xml => @post }
-    end
-  end
-
-  def new
-    @post = Post.new
-
-    respond_to do |format|
-      format.html# new.html.haml
-      format.xml { render :xml => @post }
-      format.json { render json: @post }
+      format.json { render json: Post.all }
+      format.html
     end
   end
 
   def create
-    @post = Post.new(post_params)
-    @post.save!
-     
-    respond_to do |format|
-
-      if @post.save
-        format.html { redirect_to(root_url( @post ), :notice => 'Your blog post was created') }
-        format.xml { render :xml => @post, :status => :created, :location => @post }
-      end
-    end
+    respond_with Post.create(post_params)
   end
 
   def destroy
-    @post = Post.find(params[:id])
-    @post.destroy
-    respond_to do |format|
-      format.html { redirect_to(home_index_path) }
-      format.xml { head :ok }
-    end
+    respond_with Post.destroy(params[:id])
+  end
+
+  def destroy
+     respond_with Post.destroy(params[:id])
   end
 
   private
 
   def post_params
-    params.permit(:id, :created_at, :updated_at, :post_text, :user, :SUBJECT, :FIRST_NAME, :LAST_NAME, :EMAIL)
+    params.require(:post).permit(:id, :created_at, :updated_at, :post_text, :user, :SUBJECT, :FIRST_NAME, :LAST_NAME, :EMAIL)
   end
 end

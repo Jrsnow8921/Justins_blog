@@ -13,6 +13,7 @@
 //= require angular-rails-templates
 //= require angular-ui-bootstrap
 //= require app
+//= require post.js
 //= require_tree ./services
 //= require_tree ./controllers
 //= require_tree ./directives

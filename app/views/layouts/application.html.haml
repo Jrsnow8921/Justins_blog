@@ -13,13 +13,8 @@
     = javascript_include_tag "application"
     = csrf_meta_tag 
   %body
-    %nav.navbar.navbar-fixed-top
-      .nav.nav-pills{:style => 'margin-right:20px; margin-left:20px;'}
-        %h3{:style => 'color: white'}Welcome to Justin's blog 
-
     .container-fluid{:style => 'margin-top:60px;'}
       .row-fluid
-        .span12
       %section
         .row-fluid
           .span12
@@ -29,6 +24,5 @@
 
 
           = yield
-
 
 

@@ -1,22 +1,46 @@
-%body{"ng-app" => "myApp"}
-  .container
-    .header
-      %ul.nav.nav-pills.pull-left
-        %li.active
-          %a{"ng-href" => "/"} Back
+%ul.nav.nav-pills.pull-left
+  %li.active
+    %a{:href => "home", :class => 'val_class'} Home 
 
-%table.table.table-bordered.trace-table
-  %thead
-    %tr.trace-table
-      %th.ts.jp{:style => 'border: solid black;'} Subject
-      %th.ts.jp{:style => 'border: solid black;'} First Name
-      %th.ts.jp{:style => 'border: solid black;'} Last Name
-      %th.ts.jp{:style => 'border: solid black;'} Post
+.container{"ng-app" => "Post"}
+  %h1 Recent Post
+  %div{"ng-controller" => "PostController"}
+    .well
+      %h3 Add a new post
+      %form{"ng-submit" => "addPost()"}
+        .row
+          .col-xs-6
+            %input.form-control{"ng-model" => "newPost.FIRST_NAME", :placeholder => "First Name", :type => "text"}/
+          .col-xs-6
+            %input.form-control{"ng-model" => "newPost.LAST_NAME", :placeholder => "Last Name", :type => "text"}/
+        .row
+          .col-xs-12
+            %br/
+            %input.form-control{"ng-model" => "newPost.SUBJECT", :placeholder => "Subject", :type => "text"}/
+        .row
+          .col-lg-12 
+            %br/
+            %input.form-control{"ng-model" => "newPost.post_text", :placeholder => "Post Text", :type => "text"}/
 
-    -@post.each do |p|
-      %tr.trace-table
-        %td.trace-table{:style => 'border: solid black;'}= p.SUBJECT
-        %td.trace-table{:style => 'border: solid black;'}= p.FIRST_NAME
-        %td.trace-table{:style => 'border: solid black;'}= p.LAST_NAME
-        %td.trace-table{:style => 'border: solid black;'}= p.post_text
+        .row
+          .col-xs-12.text-center
+            %br/
+            %input.btn.btn-primary{:type => "Submit", :value => "Add Post"}/
 
+      %table.table.table-bordered.trace-table
+        %thead
+          %tr.trace-table
+            %th.ts.jp{:style => 'border: solid black;'} First Name
+            %th.ts.jp{:style => 'border: solid black;'} Last Name
+            %th.ts.jp{:style => 'border: solid black;'} Post 
+            %th.ts.jp{:style => 'border: solid black;'} Subject
+            %th.ts.jp{:style => 'border: solid black;'} Delete
+
+        %tr.trace-table
+          %tr{"ng-repeat" => "post in posts track by $index"}
+            %td.trace-table{:style => 'border: solid black;'} {{ post.FIRST_NAME }}
+            %td.trace-table{:style => 'border: solid black;'} {{ post.LAST_NAME }}
+            %td.trace-table{:style => 'border: solid black;'} {{ post.post_text }}
+            %td.trace-table{:style => 'border: solid black;'} {{ post.SUBJECT }}
+            %td.trace-table{:style => 'border: solid black;'}
+              %a.btn.btn-danger{"ng-click" => "deletePost($index)"} _

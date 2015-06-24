@@ -17,7 +17,6 @@ angular.module( 'myApp',
 
   $routeProvider.when( '/',      { templateUrl: 'main.html',  controller: 'MainCtrl' } );
   $routeProvider.when( '/about', { templateUrl: 'about.html', controller: 'AboutCtrl' } );
-  $routeProvider.when( '/post', { templateUrl: 'new_post.html', controller: 'PostCtrl' } );
   
 
   $routeProvider.otherwise( { redirectTo: '/' } );
