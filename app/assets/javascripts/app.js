@@ -17,6 +17,7 @@ angular.module( 'myApp',
 
   $routeProvider.when( '/',      { templateUrl: 'main.html',  controller: 'MainCtrl' } );
   $routeProvider.when( '/about', { templateUrl: 'about.html', controller: 'AboutCtrl' } );
+  $routeProvider.when( '/map', { templateUrl: 'map.html', controller: 'MapCtrl' } );
   
 
   $routeProvider.otherwise( { redirectTo: '/' } );
