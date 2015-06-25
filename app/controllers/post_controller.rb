@@ -25,10 +25,6 @@ class PostController < ApplicationController
     respond_with Post.destroy(params[:id])
   end
 
-  def destroy
-     respond_with Post.destroy(params[:id])
-  end
-
   private
 
   def post_params
