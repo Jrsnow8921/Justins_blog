@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   #angular route
   resources :post, only: [:index, :create, :destroy], defaults: {format: :json}
 
-    
   resources :home 
  
   namespace :api do
