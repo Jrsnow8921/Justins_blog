@@ -3,6 +3,7 @@ development:
   database: snowman_auth_db_dev
   pool: 5
   timeout: 5000
+
 test:
   adapter: postgresql
   database: snowman_auth_db_dev
